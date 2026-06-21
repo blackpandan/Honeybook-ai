@@ -1,19 +1,17 @@
 version: "3.9"
- 
+
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: honeybook-ai
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env
+  postgres:
+    image: postgres:16-alpine
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    environment:
+      POSTGRES_USER: hbadmin
+      POSTGRES_PASSWORD: HoneyTest#
+      POSTGRES_DB: honeybook_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
