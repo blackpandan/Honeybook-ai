@@ -1,3 +1,4 @@
 .env*
 honeybook_ai_backend_env
 honeybook_ai_backend_env/*
+__pycache__/*
